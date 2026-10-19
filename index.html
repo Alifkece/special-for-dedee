@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#100a10">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Untukmu, Semua Alasan Aku Bersyukur ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Pinyon+Script&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="petal-canvas"></canvas>
+
+<div class="progress-dots" id="progressDots"></div>
+<button class="music-btn" id="musicBtn" type="button" title="Toggle musik" aria-label="Nyalakan atau matikan musik" aria-pressed="false"><svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5v5h3.5l4.5 4v-13l-4.5 4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.2 6.4a8 8 0 0 1 0 11.2"/></svg><svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5v5h3.5l4.5 4v-13l-4.5 4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+<button class="fs-btn" id="fsBtn" type="button" title="Layar penuh" aria-label="Masuk atau keluar layar penuh" hidden><svg class="icon-enter" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="icon-exit" viewBox="0 0 24 24" aria-hidden="true" focusable="false" hidden><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button>
+
+<!-- ============================================================
+     SECTION 1 — GIFT OPENING
+============================================================ -->
+<section class="page page--gift active" id="page-gift">
+
+  <div class="intro-typer" id="introTyper">
+    <span class="intro-typer-text" id="introTyperText"></span><span class="intro-caret">|</span>
+  </div>
+
+  <div class="gift-content" id="giftContent">
+    <p class="eyebrow"><span>✦</span> sebelum kita mulai <span>✦</span></p>
+    <h1 class="sec-title sec-title--gift">Ada Sesuatu yang Aku Simpan<br><em>Untukmu</em></h1>
+    <p class="sec-sub sec-sub--gift">bukan hadiah yang bisa kamu pegang — hanya sekumpulan hal yang aku syukuri dan belum pernah aku ucapkan dengan lantang</p>
+
+    <div class="gift-container" id="giftBox">
+      <div class="gift-glow"></div>
+      <div class="gift-lid">
+        <div class="lid-shine"></div>
+        <div class="gift-bow">
+          <div class="bow-tail-l"></div>
+          <div class="bow-tail-r"></div>
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+          <div class="bow-center"></div>
+        </div>
+      </div>
+      <div class="gift-box-body">
+        <div class="box-dots"></div>
+        <div class="box-shine"></div>
+      </div>
+    </div>
+
+    <p class="gift-hint" id="giftHint"><svg class="spark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C12.8 7.5 16.5 11.2 22 12 16.5 12.8 12.8 16.5 12 22 11.2 16.5 7.5 12.8 2 12 7.5 11.2 11.2 7.5 12 2z"/></svg> <span class="hint-label" id="giftHintLabel">ketuk untuk membukanya</span> <svg class="spark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C12.8 7.5 16.5 11.2 22 12 16.5 12.8 12.8 16.5 12 22 11.2 16.5 7.5 12.8 2 12 7.5 11.2 11.2 7.5 12 2z"/></svg></p>
+  </div>
+
+  <audio id="bgMusic" src="./assets/audio/3.mp3" preload="auto" loop=""></audio>
+</section>
+
+<canvas id="burst-canvas"></canvas>
+<div id="burst-layer"></div>
+
+<!-- ============================================================
+     SECTION 2 — GRATITUDE BOOK (3D page-turn)
+============================================================ -->
+<section class="page page--book" id="page-book">
+  <p class="eyebrow">✦ sebuah buku kecil yang aku tulis untukmu ✦</p>
+  <h2 class="sec-title">Buku Kecil <em>Rasa Syukurku</em></h2>
+  <p class="sec-sub">satu halaman, satu alasan aku bersyukur atas kehadiranmu — ketuk untuk membalik</p>
+
+  <div class="book-stage">
+    <div class="book">
+      <div class="book-spine"></div>
+      <div class="book-base">
+        <!-- LEFT static page: cover-ish intro, stays visible under all leaves -->
+        <div class="book-half left">
+          <p class="page-label">Halaman Pembuka</p>
+          <div class="page-photo" style="--photo-tilt:-2deg;">
+            <span class="photo-tape"></span>
+            <img src="./assets/images/2.jpg" alt="Opening memory">
+          </div>
+          <h3 class="page-title">Untuk Semua yang<br>Tidak Sempat Aku Ucapkan</h3>
+          <p class="page-text">Buku ini penuh dengan hal-hal kecil yang selalu aku rasakan tapi jarang pernah aku ungkapkan. Sebagian terasa sepele, sebagian agak memalukan untuk diakui, tapi semuanya nyata. Jadi nikmati saja setiap halamannya, ya? Tidak perlu buru-buru.</p>
+          <span class="page-number">i</span>
+        </div>
+
+        <!-- RIGHT static page: visible once all leaves are flipped -->
+        <div class="book-half right">
+          <p class="page-label">Halaman Penutup</p>
+          <div class="page-photo" style="--photo-tilt:2deg;">
+            <span class="photo-tape"></span>
+            <img src="./assets/images/3.jpg" alt="Closing memory">
+          </div>
+          <h3 class="page-title">Selesai Sudah,<br>Tapi Rasa Ini Tidak</h3>
+          <p class="page-text">Oke, ini halaman terakhir — tapi sejujurnya, ini belum semuanya. Masih banyak yang belum aku tuliskan, karena daftarnya terus bertambah setiap hari yang aku habiskan bersamamu. Anggap saja ini baru jilid pertama.</p>
+          <span class="page-number">x</span>
+        </div>
+
+        <!-- FLIPPABLE LEAVES (rendered back-to-front via z-index, last in DOM = topmost initially) -->
+        <div class="leaf" data-leaf="5">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 9</p>
+            <div class="page-photo" style="--photo-tilt:-2deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/4.jpg" alt="Memory for page 9">
+            </div>
+            <h3 class="page-title">Untuk Caramu Bertahan</h3>
+            <p class="page-text">Aku tahu hidupmu juga tidak selalu mudah. Ada hari-hari ketika kamu mungkin ingin menyerah pada banyak hal, tapi kamu terus memilih untuk bertahan, terus memilih untuk tetap mencintai. Itu bukan hal kecil bagiku — itu keberanian yang diam-diam, dan itu sesuatu yang aku kagumi lebih dari yang pernah aku ungkapkan.</p>
+            <span class="page-number">9</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 10</p>
+            <div class="page-photo" style="--photo-tilt:2deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/12.jpg" alt="Memory for page 10">
+            </div>
+            <h3 class="page-title">Untuk Mimpi yang Kamu Titipkan</h3>
+            <p class="page-text">Kamu sudah mempercayaiku dengan harapan dan rencanamu, hal-hal yang benar-benar kamu pedulikan, bukan hanya yang di permukaan. Sebagian dari mimpi-mimpi itu, kini kita bangun bersama. Aku tidak menganggap itu enteng, dan aku tidak akan menyia-nyiakan kepercayaan yang kamu berikan kepadaku.</p>
+            <span class="page-number">10</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="4">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 7</p>
+            <div class="page-photo" style="--photo-tilt:-1.5deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/9.jpg" alt="Memory for page 7">
+            </div>
+            <h3 class="page-title">Untuk Pesan-Pesan Kecilmu</h3>
+            <p class="page-text">"Udah makan belum", "hati-hati di jalan", "aku di sini kalau kamu butuh" — pesan-pesan kecil itu selalu muncul tepat saat aku membutuhkannya, seolah kamu entah bagaimana tahu. Bukan pesan yang panjang pun, tapi selalu berhasil membuat hariku terasa sedikit lebih ringan, setiap kali.</p>
+            <span class="page-number">7</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 8</p>
+            <div class="page-photo" style="--photo-tilt:1.5deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/10.jpg" alt="Memory for page 8">
+            </div>
+            <h3 class="page-title">Untuk Rasa Aman yang Kamu Beri</h3>
+            <p class="page-text">Di dekatmu, aku tidak perlu berpura-pura baik-baik saja ketika tidak. Kamu memberi ruang untukku berantakan kadang-kadang, untuk tidak punya segalanya, tanpa membuatku merasa dihakimi. Rasa aman seperti itu sejujurnya adalah salah satu hal terbaik yang pernah diberikan siapa pun kepadaku.</p>
+            <span class="page-number">8</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="3">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 5</p>
+            <div class="page-photo" style="--photo-tilt:-2.5deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/6.jpg" alt="Memory for page 5">
+            </div>
+            <h3 class="page-title">Untuk Caramu Mendengarkan</h3>
+            <p class="page-text">Kamu mendengarkan ceritaku bahkan ketika aku mengulang hal yang sama, bahkan ketika apa yang aku katakan tidak terlalu penting. Kamu tidak menyela atau memotongku, dan tidak pernah membuatku merasa aku terlalu banyak bicara. Jujur, itu sesuatu yang langka, dan aku selalu menyadarinya setiap kali.</p>
+            <span class="page-number">5</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 6</p>
+            <div class="page-photo" style="--photo-tilt:2.5deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/15.jpg" alt="Memory for page 6">
+            </div>
+            <h3 class="page-title">Untuk Caramu Melihatku</h3>
+            <p class="page-text">Kamu tidak hanya melihatku di hari-hari baikku. Kamu sudah melihatku lelah, frustrasi, tidak benar-benar baik-baik saja — dan kamu tetap memilih untuk tinggal. Dilihat seperti itu, sepenuhnya, tanpa harus berpura-pura, adalah sesuatu yang sungguh aku syukuri.</p>
+            <span class="page-number">6</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="2">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 3</p>
+            <div class="page-photo" style="--photo-tilt:-1deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/4.jpg" alt="Memory for page 3">
+            </div>
+            <h3 class="page-title">Untuk Hal-Hal Kecil yang Kamu Ingat</h3>
+            <p class="page-text">Kamu ingat hal-hal seperti minuman favoritku, atau satu hari yang berat dua minggu lalu yang hampir tidak aku sebut. Detail-detail kecil yang kamu pegang itu yang membuatku merasa kamu benar-benar memperhatikan, bukan sekadar mendengar karena kebiasaan.</p>
+            <span class="page-number">3</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 4</p>
+            <div class="page-photo" style="--photo-tilt:1deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/5.jpg" alt="Memory for page 4">
+            </div>
+            <h3 class="page-title">Untuk Kesabaranmu Padaku</h3>
+            <p class="page-text">Aku tidak selalu mudah dihadapi, aku tahu itu. Tapi kamu memilih kesabaran daripada menyerah, kamu memilih berbicara daripada pergi. Cinta seperti itu tidak selalu terlihat keras atau jelas, tapi aku merasakannya setiap kali, bahkan ketika aku tidak mengatakannya.</p>
+            <span class="page-number">4</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="1">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 1</p>
+            <div class="page-photo" style="--photo-tilt:-2deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/3.jpg" alt="Memory for page 1">
+            </div>
+            <h3 class="page-title">Untuk Waktu yang Kamu Berikan</h3>
+            <p class="page-text">Waktu adalah satu hal yang tidak bisa dikembalikan, dan kamu terus memilih untuk menghabiskannya bersamaku — bahkan dengan semua yang sedang berjalan, semua hal lain yang menarik perhatianmu. Aku tidak akan pura-pura itu sesuatu yang biasa atau yang aku layak dapatkan begitu saja. Itu berarti banyak, lebih dari yang biasanya aku tunjukkan.</p>
+            <span class="page-number">1</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 2</p>
+            <div class="page-photo" style="--photo-tilt:2deg;">
+              <span class="photo-tape"></span>
+              <img src="./assets/images/11.jpg" alt="Memory for page 2">
+            </div>
+            <h3 class="page-title">Untuk Caramu Tetap Memilihku</h3>
+            <p class="page-text">Dari semua pilihan dan kemungkinan yang ada di luar sana, kamu terus memilih untuk ada di sini, bersamaku. Itu terjadi setiap hari, dengan tenang, tanpa membesar-besarkannya — dan itulah tepatnya mengapa aku merasa begitu beruntung, setiap kali aku berhenti dan memikirkannya.</p>
+            <span class="page-number">2</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="book-progress" id="bookProgress">halaman <strong>0</strong> dari <strong>10</strong> dibuka</p>
+  <button class="btn btn-next hidden" id="bookNextBtn" data-next="page-letter">Lanjut ⟶</button>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — LETTER WITH WAX SEAL
+============================================================ -->
+<section class="page page--letter" id="page-letter">
+  <p class="eyebrow">✦ satu hal lagi sebelum kita lanjut ✦</p>
+  <h2 class="sec-title">Sebuah Surat <em>untuk kamu sayang</em></h2>
+  <p class="sec-sub">ada hal-hal yang lebih mudah ditulis daripada diucapkan</p>
+
+  <div class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="letter-paper" id="letterPaper">
+        <p class="letter-text">Hei, kamu —</p>
+        <p class="letter-text">
+          Ada setumpuk rasa syukur yang terus menumpuk di kepalaku
+          hampir setiap hari, tapi kebanyakan waktu aku tidak tahu cara
+          mengungkapkannya tanpa terdengar terlalu dramatis. Jadi aku pikir
+          lebih baik aku tuliskan saja.
+        </p>
+        <p class="letter-text">
+          Aku merasa beruntung. Bukan karena segalanya sempurna atau selalu mudah —
+          memang tidak — tapi karena di tengah semua bagian hidup yang berantakan
+          dan belum selesai ini, aku punya kamu untuk melewatinya bersama.
+          Jujur, itu sudah lebih dari cukup bagiku.
+        </p>
+        <p class="letter-text">
+          Terima kasih sudah bertahan di hari-hari ketika aku sulit dihadapi,
+          karena percaya kepadaku bahkan ketika aku tidak percaya pada diriku sendiri,
+          dan karena mencintaiku dengan cara yang sederhana tapi entah kenapa
+          selalu terasa sangat berarti.
+        </p>
+        <p class="letter-text">
+          Semoga surat kecil ini cukup menyampaikan apa yang biasanya aku simpan
+          sendiri: aku bersyukur, hari ini dan setiap hari, hanya karena kamu ada di sini.
+        </p>
+        <p class="letter-signoff">milikmu, selalu bersyukur</p>
+      </div>
+      <div class="envelope-flap"></div>
+      <div class="wax-seal" id="waxSeal"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5l-1.2-1.1C6 15.2 3 12.5 3 9.1 3 6.4 5.1 4.4 7.6 4.4c1.7 0 3.3.9 4.4 2.2 1.1-1.3 2.7-2.2 4.4-2.2 2.5 0 4.6 2 4.6 4.7 0 3.4-3 6.1-7.8 10.3L12 20.5z"/></svg></div>
+    </div>
+  </div>
+
+  <p class="letter-hint" id="letterHint">⋆ tap the envelope to open it ♡</p>
+  <button class="btn btn-next hidden" id="letterNextBtn" data-next="page-gallery">Continue to Memories ⟶</button>
+</section>
+
+<!-- ============================================================
+     SECTION 4 — MOSAIC GALLERY
+============================================================ -->
+<section class="page page--gallery" id="page-gallery">
+  <p class="eyebrow">✦ pieced together, one by one ✦</p>
+  <h2 class="sec-title">Our Memory <em>Wall</em></h2>
+  <p class="sec-sub">every little piece of this is part of why I'm grateful</p>
+
+  <div class="mosaic-wall" id="mosaicWall">
+    <div class="mosaic-tile t-big" style="--tilt:-1deg" data-cap="the one I look back on the most">
+      <img loading="lazy" decoding="async" src="./assets/images/7.jpg" alt="Memory 1">
+      <div class="tile-cap">the one I look back on the most</div>
+    </div>
+    <div class="mosaic-tile t-wide" style="--tilt:1deg" data-cap="such a simple moment, but it felt special">
+      <img loading="lazy" decoding="async" src="./assets/images/13.jpg" alt="Memory 2">
+      <div class="tile-cap">such a simple moment, but it felt special</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:-2deg" data-cap="my favorite kind of laugh">
+      <img loading="lazy" decoding="async" src="./assets/images/15.jpg" alt="Memory 3">
+      <div class="tile-cap">my favorite kind of laugh</div>
+    </div>
+    <div class="mosaic-tile t-tall" style="--tilt:1.5deg" data-cap="you, just being there, is always enough">
+      <img loading="lazy" decoding="async" src="./assets/images/16.jpg" alt="Memory 4">
+      <div class="tile-cap">you, just being there, is always enough</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:-1deg" data-cap="small thing, big meaning">
+      <img loading="lazy" decoding="async" src="./assets/images/21.jpg" alt="Memory 5">
+      <div class="tile-cap">small thing, big meaning</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:2deg" data-cap="feels like coming home">
+      <img loading="lazy" decoding="async" src="./assets/images/5.jpg" alt="Memory 6">
+      <div class="tile-cap">feels like coming home</div>
+    </div>
+    <div class="mosaic-tile t-wide" style="--tilt:-1.5deg" data-cap="a memory I keep close">
+      <img loading="lazy" decoding="async" src="./assets/images/14.jpg" alt="Memory 7">
+      <div class="tile-cap">a memory I keep close</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:1deg" data-cap="grateful for today">
+      <img loading="lazy" decoding="async" src="./assets/images/3.jpg" alt="Memory 8">
+      <div class="tile-cap">grateful for today</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:-2deg" data-cap="golden hour looks good on you">
+      <img loading="lazy" decoding="async" src="./assets/images/2.jpg" alt="Memory 9">
+      <div class="tile-cap">golden hour looks good on you</div>
+    </div>
+  </div>
+
+  <p class="gallery-words">✦ lucky, quietly, in every single one of these ✦</p>
+  <button class="btn btn-next" data-next="page-video">Continue to the Message ⟶</button>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Tutup foto"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <img id="lbImg" src="" alt="">
+  <p class="lb-cap" id="lbCap"></p>
+</div>
+
+<!-- ============================================================
+     SECTION 5 — VIDEO MESSAGE
+============================================================ -->
+<section class="page page--video" id="page-video">
+  <p class="eyebrow">✦ for this last part, let my voice do the talking ✦</p>
+  <h2 class="sec-title">A Message, <em>Out Loud</em></h2>
+
+  <div class="video-frame" id="videoFrame">
+    <div class="video-stage" id="videoStage">
+      <video class="video-el" id="storyVideo" src="./assets/videos/12.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="Video pesan">
+        Browser kamu tidak mendukung tag video.
+      </video>
+    </div>
+  </div>
+
+  <button class="btn btn-next" data-next="page-final" type="button">CONTINUE TO THE LAST PAGE →</button>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — FINAL CLOSING
+============================================================ -->
+<section class="page page--final" id="page-final">
+  <p class="eyebrow">✦ a closing, not an ending ✦</p>
+
+  <div class="closing-orbit">
+    <div class="ring ring--1"></div>
+    <div class="ring ring--2"></div>
+    <span class="word word--1">grateful</span>
+    <span class="word word--2">lucky</span>
+    <span class="word word--3">thank you</span>
+    <span class="word word--4">always</span>
+    <span class="word word--5">you</span>
+    <svg class="core" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+  </div>
+
+  <h2 class="sec-title">Thank You, <em>Love</em></h2>
+  <div class="line-deco"></div>
+  <p class="closing-body">
+    The book's been read, the letter's open, and the memories are all
+    laid out now. But honestly, the way I feel about you doesn't stop
+    at the last page — it just keeps adding up, every single day I get
+    to spend with you.
+  </p>
+  <p class="closing-body">
+    Thank you for being a big part of why I feel this lucky. I'm going
+    to keep trying to be someone who deserves all the good you bring
+    into my life, today and for as long as we've got.
+  </p>
+  <p class="closing-foot">made with a kind of gratitude that doesn't really run out, just for you ♡</p>
+</section>
+
+<script src="./script.js"></script>
+</body>
+</html>
